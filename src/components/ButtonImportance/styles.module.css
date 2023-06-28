@@ -1,0 +1,48 @@
+.buttonWrap{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+.buttonBase{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    background-color: gray;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+.buttonBase:hover > .center{
+    width: 30px;
+    height: 30px;
+}
+.buttonList{
+    position: absolute;
+    top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+.center{
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    transition: .5s
+}
+ul{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li{
+    margin: 1px 0
+}
+.easy{
+    background-color: green;
+}
+.medium{
+    background-color: yellow;
+}
+.hard{
+    background-color: red;
+}

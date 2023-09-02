@@ -1,0 +1,14 @@
+.center{
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+}
+.easy{
+    background-color: #54CA2A;
+}
+.medium{
+    background-color: #D8D127;
+}
+.hard{
+    background-color: #DE3535;
+}

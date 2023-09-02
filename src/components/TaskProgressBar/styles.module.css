@@ -1,0 +1,14 @@
+.container{
+    position: relative;
+    border-radius: 8px;
+    height: 2px;
+    width: 90%;
+    opacity: .5;
+    border: 2px solid black;
+}
+.bar{
+    position: relative;
+    border-radius: 8px;
+    background-color: aqua;
+    height: 100%;
+}

@@ -1,0 +1,15 @@
+.create{
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.wrapper{
+    display: flex;
+    height: 100%;
+    width: 80%;
+    padding: 50px 50px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

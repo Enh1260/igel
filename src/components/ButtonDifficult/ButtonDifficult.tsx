@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Difficult } from '../../types/task'
 import styles from './styles.module.css'
 
+
 type Props = {
     value: Difficult,
     onChange: (v: Difficult) => void
@@ -9,12 +10,30 @@ type Props = {
 
 function ButtonDifficult({value, onChange}: Props){
     const [isOpen, setIsOpen] = useState(true)
-  //  const [selectedStatus, setSelectedStatus] = useState(value)
+    const buttonListOptions = [
+        {
+            type: Difficult.Easy,
+            style: `${styles.center} ${styles.easy}`
+        },
+        {
+            type: Difficult.Medium,
+            style: `${styles.center} ${styles.medium}`
+        },
+        {
+            type: Difficult.Hard,
+            style: `${styles.center} ${styles.hard}`
+        }                
+    ]
     const selectButton = (value: number) => {
-    //    setSelectedStatus(value)
         onChange(value)
         setIsOpen(false)
     }
+
+    let buttonListItems = buttonListOptions.filter(btn => {
+        return btn.type !== value
+    })
+    .map(btn => btn.type !== value && <li onClick={() => selectButton(btn.type)} className={btn.style}></li>)
+
     let baseCenter = (<div className={ styles.center +' '+ styles.easy }></div>)
     if(value === Difficult.Easy){
         baseCenter = (<div className={ styles.center +' '+ styles.easy }></div>)
@@ -25,22 +44,14 @@ function ButtonDifficult({value, onChange}: Props){
     }
     return(
         <>
-        <div title="Сложность" className={ styles.buttonWrap }>
-            <div onClick={ () => setIsOpen(!isOpen) } className={ styles.buttonBase}>
+        <div onMouseEnter={ () => setIsOpen(true) } onMouseLeave={ () => setIsOpen(false) } title="Сложность" className={ styles.buttonWrap }>
+            <div  className={ styles.buttonBase}>
                 { baseCenter }
             </div>
             {
             isOpen &&
             <ul className={ styles.buttonList }>
-                <li className={ styles.buttonBase } onClick={() => selectButton(Difficult.Easy)}>
-                    <div className={ styles.center +' '+ styles.easy }></div>
-                </li>
-                <li className={ styles.buttonBase } onClick={() => selectButton(Difficult.Medium)}>
-                    <div className={ styles.center +' '+ styles.medium }></div>
-                </li>
-                <li className={ styles.buttonBase } onClick={() => selectButton(Difficult.Hard)}>
-                    <div className={ styles.center +' '+ styles.hard }></div>
-                </li>
+                { buttonListItems }
             </ul>                
             }
 

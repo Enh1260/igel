@@ -1,0 +1,33 @@
+.wrapper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, .3);
+    z-index: 100;
+}
+.addButton{
+    border-radius: 50%;
+}
+.addOpen{
+    background-color: white;
+    border: 1px solid black;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    box-shadow: 0 0 10px 4px white;
+}
+.actionBtn{
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.accept{
+    background-image: url('../../assets/icons/AcceptIcon.svg');
+}
+.cancel{
+    background-image: url('../../assets/icons/CancelIcon.svg');
+}

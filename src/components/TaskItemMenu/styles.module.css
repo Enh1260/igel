@@ -1,0 +1,32 @@
+.list{
+    display: none;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    left: 10px;
+
+}
+.btnIcon{
+    width: 15px;
+    height: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.btn{
+    display: flex;
+    position: relative;
+}
+.btn:hover .list{
+    display: flex;
+
+}
+.btnDot{
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background-color: black;
+}

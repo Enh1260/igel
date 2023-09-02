@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import { Urgency } from '../../types/task'
+import UrgencyHardIcon from '../../assets/icons/UrgencyHardIcon.svg'
+import UrgencyDefaultIcon from '../../assets/icons/UrgencyDefaultIcon.svg'
 import styles from './styles.module.css'
 
 type Props = {
@@ -8,37 +9,19 @@ type Props = {
 }
 
 function ButtonUrgency({value, onChange}: Props){
-    const [isOpen, setIsOpen] = useState(true)
-  //  const [selectedStatus, setSelectedStatus] = useState(value)
-    const selectButton = (value: number) => {
-    //    setSelectedStatus(value)
-        onChange(value)
-        setIsOpen(false)
-    }
-    let baseCenter = (<div className={ styles.center +' '+ styles.easy }></div>)
-    if(value === Urgency.Low){
-        baseCenter = (<div className={ styles.center +' '+ styles.easy }></div>)
-    }else if(value === Urgency.High){
-        baseCenter = (<div className={ styles.center +' '+ styles.hard }></div>)
+
+    const urgencyIcon = value === Urgency.Low ? UrgencyDefaultIcon : UrgencyHardIcon
+
+    const changeValue = () => {
+        const newValue = value === Urgency.Low ? Urgency.High : Urgency.Low
+        onChange(newValue)
     }
     return(
         <>
-        <div title="Срочность" className={ styles.buttonWrap }>
-            <div onClick={ () => setIsOpen(!isOpen) } className={ styles.buttonBase}>
-                { baseCenter }
-            </div>
-            {
-            isOpen &&
-            <ul className={ styles.buttonList }>
-                <li className={ styles.buttonBase } onClick={() => selectButton(Urgency.Low)}>
-                    <div className={ styles.center +' '+ styles.easy }></div>
-                </li>
-                <li className={ styles.buttonBase } onClick={() => selectButton(Urgency.High)}>
-                    <div className={ styles.center +' '+ styles.hard }></div>
-                </li>
-            </ul>                
-            }
-
+        <div title="Срочность" onClick={() => changeValue()} className={ styles.buttonWrap }>
+            <div className={ styles.buttonBase} >
+                <img src={ urgencyIcon } alt="" />
+            </div>            
         </div>
         </>
     )

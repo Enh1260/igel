@@ -1,5 +1,7 @@
 .buttonWrap{
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     position: relative;
 }
@@ -7,10 +9,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    background-color: gray;
-    width: 30px;
-    height: 30px;
+    border-radius: 7px;
+    background-image: url('../../assets/ButtonDifficult.svg');
+   /* background: radial-gradient(#D9D9D9 0%, #e2dfdf 40%);*/
+    width: 40px;
+    height: 40px;
     cursor: pointer;
 }
 .buttonBase:hover > .center{

@@ -14,11 +14,31 @@ export enum Importance {
 }
 
 export type TTask = {
+    id: number,
     text: string,
-    comment?: string,
+    comment: string | null,
     difficult: Difficult,
     urgency: Urgency,
     importance: Importance,
-    isActive: boolean,
-    deadline?: Date | null
+    isComplete: boolean,
+    deadlineAt?: Date | null,
+    taskParentId: number | null,
+    createAt: Date,
+    updateAt: Date,
+    tasks: TTask[] | null
+}
+
+export interface ITaskCreation {
+    text: string,
+    comment: string | null,
+    difficult: Difficult,
+    urgency: Urgency,
+    importance: Importance,
+    taskParentId: number | null,
+    deadlineAt?: Date | null
+}
+
+export interface ITaskUpdate {
+    value: boolean | string | number | null,
+    id: number
 }

@@ -1,5 +1,6 @@
-import { useState } from 'react'
 import { Importance } from '../../types/task'
+import ImportanceIcon from './ImportanceIcon'
+
 import styles from './styles.module.css'
 
 type Props = {
@@ -8,37 +9,18 @@ type Props = {
 }
 
 function ButtonImportance({value, onChange}: Props){
-    const [isOpen, setIsOpen] = useState(true)
-  //  const [selectedStatus, setSelectedStatus] = useState(value)
-    const selectButton = (value: number) => {
-    //    setSelectedStatus(value)
-        onChange(value)
-        setIsOpen(false)
-    }
-    let baseCenter = (<div className={ styles.center +' '+ styles.easy }></div>)
-    if(value === Importance.Low){
-        baseCenter = (<div className={ styles.center +' '+ styles.easy }></div>)
-    }else if(value === Importance.High){
-        baseCenter = (<div className={ styles.center +' '+ styles.hard }></div>)
+    const iconColor = value === 0 ? '#D8D127' : '#DE3535'
+
+    const changeValue = () => {
+        const newValue = value === Importance.Low ? Importance.High : Importance.Low
+        onChange(newValue)
     }
     return(
         <>
-        <div title="Важность" className={ styles.buttonWrap }>
-            <div onClick={ () => setIsOpen(!isOpen) } className={ styles.buttonBase}>
-                { baseCenter }
-            </div>
-            {
-            isOpen &&
-            <ul className={ styles.buttonList }>
-                <li className={ styles.buttonBase } onClick={() => selectButton(Importance.Low)}>
-                    <div className={ styles.center +' '+ styles.easy }></div>
-                </li>
-                <li className={ styles.buttonBase } onClick={() => selectButton(Importance.High)}>
-                    <div className={ styles.center +' '+ styles.hard }></div>
-                </li>
-            </ul>                
-            }
-
+        <div title="Важность" onClick={() => changeValue()} className={ styles.buttonWrap }>
+            <div className={ styles.buttonBase} >
+                <ImportanceIcon color={ iconColor }></ImportanceIcon>
+            </div>            
         </div>
         </>
     )

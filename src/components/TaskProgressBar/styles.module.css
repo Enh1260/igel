@@ -1,12 +1,12 @@
-.container{
+.bar{
     position: relative;
     border-radius: 8px;
     height: 2px;
-    width: 90%;
+    width: 100%;
     opacity: .5;
     border: 2px solid black;
 }
-.bar{
+.inner{
     position: relative;
     border-radius: 8px;
     background-color: aqua;

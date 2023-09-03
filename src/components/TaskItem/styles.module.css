@@ -1,25 +1,70 @@
 .task{
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
     justify-content: center;    
     margin-bottom: 20px;
+    font-size: .9em;
+    border-bottom: 1px solid black;
+}
+.task:hover{
+    background-color: aliceblue;
 }
 .task:last-child{
     margin-bottom: 0;
 }
 .container{
-    display: grid;
-    grid-template-columns: repeat(14, 1fr);
-    grid-template-rows: .8em 2fr 2fr;
-    row-gap: 5px;
-
-}
-.container > div{
     display: flex;
+    flex-direction: column;
+    width: 100%;
     justify-content: center;
     align-items: center;
 }
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.leftColumn{
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    height: 100%;
+    padding-top: 1em;
+    box-sizing: border-box;
+}
+.mainColumn{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0 10px;
+}
+.mainrow{
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+.hiderow{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+    padding: 0 1em;    
+}
+/*.container > div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}*/
 
 .checkbox{
     grid-column: 1/2;
@@ -49,9 +94,15 @@
     justify-content: flex-start;
 }
 .comment{
-    grid-row: 3/4;
-    grid-column: 3/14;
+    width: 100%;
     font-size: .8em;
+    padding: 0 .8em;
+    box-sizing: border-box;    
+}
+.barContainer{
+    width: 100%;
+    padding: 0 0.6em;
+    box-sizing: border-box;
 }
 .sublist{
     display: flex;

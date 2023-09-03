@@ -8,8 +8,8 @@ const TaskProgressBar = ({current, max}: TTaskProgressBarProps) => {
     console.log(current, max, progressBarWidth )
     return(
         <>
-            <div className={styles.container}>
-                <div style={{width: progressBarWidth+'%'}} className={styles.bar}></div>
+            <div className={styles.bar}>
+                <div style={{width: progressBarWidth+'%'}} className={styles.inner}></div>
             </div>
         </>
     )

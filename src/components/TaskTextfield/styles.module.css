@@ -1,0 +1,11 @@
+.textfield{
+    width: 100%;
+    border-radius: 4px;
+    padding: 0 .5em;
+}
+.low{
+    background-color: #f4f4f4;
+}
+.high{
+    background-color: #f6d61f96;
+}

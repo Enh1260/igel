@@ -5,7 +5,6 @@ import IconTaskDifficult from "../common/IconTaskDifficult"
 import IconTaskImportance from "../common/IconTaskImportance"
 import IconTaskUrgency from "../common/IconTaskUrgency"
 import CheckboxDone from "../CheckboxDone/CheckboxDone"
-import TaskTextfield from "../TaskTextfield/TaskTextfield"
 import TaskItemMenu from "../TaskItemMenu/TaskItemMenu"
 import TaskList from "../TaskList/TaskList"
 import TaskProgressBar from "../TaskProgressBar/TaskProgressBar"
@@ -29,10 +28,6 @@ const TaskItem = (props) => {
             day: 'numeric',
             timezone: 'UTC',
         }
-        const computedDate = (date: string) => {
-            const dateObj = new Date(date)
-            return dateObj.toLocaleString("ru", dateOptions)
-        }
         const creationDate = new Date(props.task.createdAt)
         const computedCreationDate = creationDate.toLocaleString("ru", dateOptions)
 
@@ -51,44 +46,29 @@ const TaskItem = (props) => {
     return(
         <>
             <div className={styles.task}>
-                <div className={styles.leftColumn}>
-                    <CheckboxDone 
-                                    onChange={onChangeCheckboxHandle} 
-                                    isComplete={props.task.isComplete} 
-                                    urgency={props.task.urgency} />
-                </div>
-                <div className={styles.mainColumn}>
-                    <div className={styles.hiderow}>
-                        <div className={styles.creationDate}>{computedDate(props.task.createdAt)}</div>
-                        {props.task.deadlineAt && 
-                            <div className={styles.deadline}>{ computedDate(props.task.deadlineAt)}</div>
-                        } 
-                    </div>
-                    <div className={styles.mainrow}>
-                            
-                            <TaskTextfield importance={props.task.importance} value={props.task.text} />                            
-                        
-                    </div>
-
-
-                    { props.task.comment && <div className={styles.comment}>{props.task.comment}</div> }
-                    <div className={styles.barContainer}>
-                        { props.task.tasks && <TaskProgressBar current={currentDoneSubTasks()} max={maxSubTasks} /> }
+                <div className={styles.container}>
+                    <CheckboxDone onChange={onChangeCheckboxHandle} isComplete={props.task.isComplete}></CheckboxDone>
+                    <div className={styles.difficult}>
+                        <IconTaskDifficult height={'0.6em'} value={Number(props.task.difficult)} />
                     </div>
                     
-                    { props.task.tasks && 
+                    <div className={styles.importance}>
+                        <IconTaskImportance height={'100%'} color={iconTaskImportanceColor} />
+                    </div>
+                    <IconTaskUrgency height={'100%'} value={props.task.urgency} />
+                    <span className={styles.text}>{props.task.text }
+                     </span>
+                    {props.task.deadlineAt && <div className={styles.deadline}>{ computedDeadlineDate }</div>}
+                    <div className={styles.creationDate}>{computedCreationDate}</div>
+                    { props.task.comment && <span className={styles.comment}>{props.task.comment}</span> }
+                    <TaskItemMenu task={props.task} className={styles.menuBtn} />
+                </div>
+                { props.task.tasks && <TaskProgressBar current={currentDoneSubTasks()} max={maxSubTasks} /> }
+                { props.task.tasks && 
                         <div className={styles.sublist}>
                             <TaskList update={props.update} list={props.task.tasks} />
                         </div>
-                    }                     
-                </div>
-
-
-                <div className={styles.rightColumn}>
-                    <TaskItemMenu task={props.task} className={styles.menuBtn} />
-                    
-                </div>
- 
+                    }  
             </div>                          
         </>
     )

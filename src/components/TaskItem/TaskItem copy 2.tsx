@@ -51,13 +51,7 @@ const TaskItem = (props) => {
     return(
         <>
             <div className={styles.task}>
-                <div className={styles.leftColumn}>
-                    <CheckboxDone 
-                                    onChange={onChangeCheckboxHandle} 
-                                    isComplete={props.task.isComplete} 
-                                    urgency={props.task.urgency} />
-                </div>
-                <div className={styles.mainColumn}>
+                <div className={styles.container}>
                     <div className={styles.hiderow}>
                         <div className={styles.creationDate}>{computedDate(props.task.createdAt)}</div>
                         {props.task.deadlineAt && 
@@ -65,30 +59,26 @@ const TaskItem = (props) => {
                         } 
                     </div>
                     <div className={styles.mainrow}>
-                            
+                        <div className={styles.row}>
+                            <CheckboxDone 
+                                onChange={onChangeCheckboxHandle} 
+                                isComplete={props.task.isComplete} 
+                                urgency={props.task.urgency} />
                             <TaskTextfield importance={props.task.importance} value={props.task.text} />                            
-                        
+                        </div>
+                        <TaskItemMenu task={props.task} className={styles.menuBtn} />
                     </div>
 
 
                     { props.task.comment && <div className={styles.comment}>{props.task.comment}</div> }
-                    <div className={styles.barContainer}>
-                        { props.task.tasks && <TaskProgressBar current={currentDoneSubTasks()} max={maxSubTasks} /> }
-                    </div>
                     
-                    { props.task.tasks && 
+                </div>
+                { props.task.tasks && <TaskProgressBar current={currentDoneSubTasks()} max={maxSubTasks} /> }
+                { props.task.tasks && 
                         <div className={styles.sublist}>
                             <TaskList update={props.update} list={props.task.tasks} />
                         </div>
-                    }                     
-                </div>
-
-
-                <div className={styles.rightColumn}>
-                    <TaskItemMenu task={props.task} className={styles.menuBtn} />
-                    
-                </div>
- 
+                    }  
             </div>                          
         </>
     )

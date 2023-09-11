@@ -10,7 +10,9 @@ import TaskItemMenu from "../TaskItemMenu/TaskItemMenu"
 import TaskList from "../TaskList/TaskList"
 import TaskProgressBar from "../TaskProgressBar/TaskProgressBar"
 import styles from './styles.module.css'
+import { useState } from "react"
 const TaskItem = (props) => {
+    console.log(props)
     const onChangeCheckboxHandle = async () => {
         props.update('isdone', !props.task.isComplete, props.task.id)
     }
@@ -33,11 +35,11 @@ const TaskItem = (props) => {
             const dateObj = new Date(date)
             return dateObj.toLocaleString("ru", dateOptions)
         }
-        const creationDate = new Date(props.task.createdAt)
-        const computedCreationDate = creationDate.toLocaleString("ru", dateOptions)
+        const [isHiderowVisible, setIsHiderowVisible] = useState(false)
 
-        const deadlineDate = new Date(props.task.deadlineAt)
-        const computedDeadlineDate = deadlineDate.toLocaleString("ru", dateOptions)
+        const handleClick = () => {
+            setIsHiderowVisible(!isHiderowVisible)
+        }
 
         const maxSubTasks = props.task.tasks?.length || 0
         const currentDoneSubTasks = (): number => {
@@ -51,44 +53,38 @@ const TaskItem = (props) => {
     return(
         <>
             <div className={styles.task}>
-                <div className={styles.leftColumn}>
-                    <CheckboxDone 
-                                    onChange={onChangeCheckboxHandle} 
-                                    isComplete={props.task.isComplete} 
-                                    urgency={props.task.urgency} />
-                </div>
-                <div className={styles.mainColumn}>
-                    <div className={styles.hiderow}>
+                <div className={styles.container} onClick={handleClick}>
+                    { isHiderowVisible && <div className={styles.hiderow}>
                         <div className={styles.creationDate}>{computedDate(props.task.createdAt)}</div>
                         {props.task.deadlineAt && 
                             <div className={styles.deadline}>{ computedDate(props.task.deadlineAt)}</div>
                         } 
-                    </div>
+                    </div>}
                     <div className={styles.mainrow}>
-                            
+                        <div className={styles.row}>
+                            <CheckboxDone 
+                                onChange={onChangeCheckboxHandle} 
+                                isComplete={props.task.isComplete} 
+                                urgency={props.task.urgency} />
                             <TaskTextfield importance={props.task.importance} value={props.task.text} />                            
-                        
+                        </div>
+                        <TaskItemMenu task={props.task} className={styles.menuBtn} />
                     </div>
 
 
                     { props.task.comment && <div className={styles.comment}>{props.task.comment}</div> }
-                    <div className={styles.barContainer}>
-                        { props.task.tasks && <TaskProgressBar current={currentDoneSubTasks()} max={maxSubTasks} /> }
-                    </div>
                     
-                    { props.task.tasks && 
+                </div>
+                { props?.task?.tasks?.length > 0 &&
+                    <div className={styles.barRow}>
+                        <TaskProgressBar current={currentDoneSubTasks()} max={maxSubTasks} /> 
+                    </div>
+                }
+                { props?.task?.tasks && 
                         <div className={styles.sublist}>
                             <TaskList update={props.update} list={props.task.tasks} />
                         </div>
-                    }                     
-                </div>
-
-
-                <div className={styles.rightColumn}>
-                    <TaskItemMenu task={props.task} className={styles.menuBtn} />
-                    
-                </div>
- 
+                    }  
             </div>                          
         </>
     )

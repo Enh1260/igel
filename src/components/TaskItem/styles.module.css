@@ -1,9 +1,10 @@
 .task{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     width: 100%;
+    padding: .5em 0;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
     margin-bottom: 20px;
     font-size: .9em;
     border-bottom: 1px solid black;
@@ -13,6 +14,7 @@
 }
 .task:last-child{
     margin-bottom: 0;
+    border-bottom: none;
 }
 .container{
     display: flex;
@@ -58,7 +60,12 @@
     justify-content: space-between;
     align-items: center;
     box-sizing: border-box;
-    padding: 0 1em;    
+    padding: 0 1em;
+}
+.barRow{
+    width: 100%;
+    padding: 0 2em;
+    box-sizing: border-box;
 }
 /*.container > div{
     display: flex;
@@ -96,22 +103,25 @@
 .comment{
     width: 100%;
     font-size: .8em;
-    padding: 0 .8em;
+    padding: 0 2.6em;
     box-sizing: border-box;    
 }
 .barContainer{
     width: 100%;
     padding: 0 0.6em;
     box-sizing: border-box;
+    box-sizing: border-box;
 }
 .sublist{
     display: flex;
     flex-direction: column;
-    width: 90%;
+    width: 100%;
     align-items: center;
     justify-content: flex-end;
     font-size: .9em;
-    padding-top: 15px;
+    padding-top: 5px;
+    box-sizing: border-box;
+    padding-left: 2em;
 }
 .difficultEasy{
     background-color: #54CA2A;

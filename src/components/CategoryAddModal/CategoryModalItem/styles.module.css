@@ -1,0 +1,32 @@
+.item{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.itemInput{
+    margin-right: 3em;
+}
+.btn{
+
+}
+.edit{
+    background-image: url('../../../assets/icons/editIcon.svg');
+
+}
+.delete{
+    background-image: url('../../../assets/icons/deleteIcon.svg');
+}
+.actionBtn{
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 0;
+    padding: 0;
+    width: 1.3em;
+    height: 1.3em;
+}
+.accept{
+    background-image: url('../../../assets/icons/AcceptIcon.svg');
+}
+.cancel{
+    background-image: url('../../../assets/icons/CancelIcon.svg');
+}

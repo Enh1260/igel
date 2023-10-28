@@ -5,17 +5,20 @@ import { updateResult } from "../../api/task.api";
 import AddTask from "../../components/addTask/AddTask";
 import type { TTask } from "../../types/task";
 import type { ICategory, ICategoryEdited } from "../../types/category";
+import type { ITaskCreation } from "../../types/task";
 import Main from "../../components/Main/Main";
 import styles from './styles.module.css'
 import "react-datepicker/dist/react-datepicker.css";
 import CategoryApi from "../../api/category.api";
 import CategoryList from "../../components/CategoryList";
 import { isAuth } from "../../hooks/AuthContext";
+import { DashboardContext } from "../../hooks/DashboardContext";
 
 function Home() {
 
 const [taskList, setTaskList] = useState([])
 const [categoryList, setCategoryList] = useState<ICategoryEdited[]>([])
+
 const getData = async() => {
     const data = await TaskApi.findAll()
     setTaskList(data)
@@ -26,7 +29,14 @@ const getData = async() => {
     setCategoryList(categoryEdited)
 }
 
-
+const createTask = async (newTask: ITaskCreation) => {
+    const resultRequst = await TaskApi.create(newTask)
+    const editedTaskList = taskList.map(task => {
+        if(task.id === resultRequst.taskParentId) task.tasks.push(resultRequst)
+        return task
+    })
+    setTaskList(editedTaskList)
+}
 
 const updateTask = async (column: string, value: string | boolean | number, id: number ) => {
     if(column === 'isdone'){
@@ -52,9 +62,11 @@ useEffect(() => {
     return(
         <>
             <div className={styles.wrapper}>
+                <DashboardContext.Provider value={{createTask}}>
                 <CategoryList categories={categoryList} setCategoryList={setCategoryList} />
                 <AddTask />
                 <Main update={updateTask} list={ taskList }></Main>
+                </DashboardContext.Provider>
             </div>
         </>
     )

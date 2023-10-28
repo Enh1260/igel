@@ -15,11 +15,26 @@
 }
 .addOpen{
     background-color: white;
-    border: 1px solid black;
+    border: 4px solid black;
+    border-radius: 8px;
+    align-items: flex-start;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: space-between;
+    padding: 1rem 2rem;
     box-shadow: 0 0 10px 4px white;
+}
+.taskRow{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 1rem 0;
+}
+.taskRow > div{
+    margin-right: 1rem;
+}
+.taskRow > div:last-child{
+    margin-right: 0;
 }
 .actionBtn{
     background-size: contain;
